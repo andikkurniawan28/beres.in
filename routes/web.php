@@ -5,13 +5,21 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CheckBidController;
+use App\Http\Controllers\OrderBidController;
+use App\Http\Controllers\PlaceBidController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FormClientController;
+use App\Http\Controllers\PaymentBidController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\FormPartnerController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\UserActivationController;
-
 
 Route::get("/", DashboardController::class)->name("dashboard")->middleware(["auth"]);
 
@@ -29,8 +37,23 @@ Route::resource("role", RoleController::class)->middleware(["auth", "ensure.perm
 Route::resource("permission", PermissionController::class)->middleware(["auth", "ensure.permission"]);
 Route::resource("user", UserController::class)->middleware(["auth", "ensure.permission"]);
 Route::resource("documentation", DocumentationController::class)->middleware(["auth", "ensure.permission"]);
+Route::resource("service", ServiceController::class)->middleware(["auth", "ensure.permission"]);
+Route::resource("partner", PartnerController::class)->middleware(["auth", "ensure.permission"]);
+Route::resource("order", OrderController::class)->middleware(["auth", "ensure.permission"]);
 
 Route::get("setting", [SettingController::class, "index"])->name("setting.index")->middleware(["auth", "ensure.permission"]);
 Route::post("setting", [SettingController::class, "process"])->name("setting.process")->middleware(["auth", "ensure.permission"]);
 Route::get("user/activation/{user_id}", UserActivationController::class)->name("user.activation")->middleware(["auth", "ensure.permission"]);
 Route::get("activity_log", [ActivityLogController::class, "index"])->name("activity_log")->middleware(["auth", "ensure.permission"]);
+
+Route::get("form-client", [FormClientController::class, "index"])->name("form-client");
+Route::post("form-client", [FormClientController::class, "process"])->name("form-client.process");
+Route::get("form-partner", [FormPartnerController::class, "index"])->name("form-partner");
+Route::post("form-partner", [FormPartnerController::class, "process"])->name("form-partner.process");
+Route::get("order-bid/{order_id}", OrderBidController::class)->name("order-bid");
+Route::get("place-bid/{order_id}/{partner_id}", [PlaceBidController::class, "index"])->name("place-bid");
+Route::post("place-bid", [PlaceBidController::class, "process"])->name("place-bid.process");
+Route::get("check-bid/{order_id}/{partner_id}", [CheckBidController::class, "index"])->name("check-bid");
+Route::post("check-bid", [CheckBidController::class, "process"])->name("check-bid.process");
+Route::get("payment-bid/{bid_id}", [PaymentBidController::class, "index"])->name("payment-bid");
+Route::post("payment-bid", [PaymentBidController::class, "process"])->name("payment-bid.process");

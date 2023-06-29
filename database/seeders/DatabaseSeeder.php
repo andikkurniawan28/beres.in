@@ -6,10 +6,12 @@ namespace Database\Seeders;
 use App\Models\Menu;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Permission;
 use App\Models\Documentation;
 use Illuminate\Database\Seeder;
+use App\Models\PartnerExpertise;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,9 +26,9 @@ class DatabaseSeeder extends Seeder
          * Variable to be seeded on settings table
          */
         $setting = [
-            ["name" => "app_name", "value" => "Laravel Starter"],
-            ["name" => "app_logo", "value" => "1686639239.png"],
-            ["name" => "app_icon", "value" => "1686640675.png"],
+            ["name" => "app_name", "value" => "Beres.in"],
+            ["name" => "app_logo", "value" => "1687764132.png"],
+            ["name" => "app_icon", "value" => "1687764144.png"],
             ["name" => "app_color", "value" => "danger"],
             ["name" => "app_font_color", "value" => "dark"],
         ];
@@ -36,7 +38,8 @@ class DatabaseSeeder extends Seeder
          */
         $role = [
             ["name" => ucfirst("admin")],
-            ["name" => ucfirst("user")],
+            ["name" => ucfirst("partner")],
+            ["name" => ucfirst("client")],
         ];
 
         /**
@@ -54,7 +57,46 @@ class DatabaseSeeder extends Seeder
          * Variable to be seeded on users table
          */
         $user = [
-            ["name" => ucfirst("admin"), "username" => "admin", "password" => bcrypt("admin"), "role_id" => 1, "is_activated" => 1],
+            [
+                "name" => ucfirst("Andik Kurniawan"),
+                "username" => "andik",
+                "password" => bcrypt("qc_12345"),
+                "phone_number" => "6281234567894",
+                "role_id" => 1,
+                "is_activated" => 1,
+            ],
+            [
+                "name" => ucfirst("abdi"),
+                "username" => "abdi",
+                "password" => bcrypt("abdi"),
+                "phone_number" => "6285733465398",
+                "role_id" => 2,
+                "is_activated" => 1,
+            ],
+            [
+                "name" => ucfirst("budi"),
+                "username" => "budi",
+                "password" => bcrypt("budi"),
+                "phone_number" => "6285733465396",
+                "role_id" => 2,
+                "is_activated" => 1,
+            ],
+            [
+                "name" => ucfirst("candra"),
+                "username" => "candra",
+                "password" => bcrypt("candra"),
+                "phone_number" => "6285733465395",
+                "role_id" => 2,
+                "is_activated" => 1,
+            ],
+            [
+                "name" => ucfirst("Saudara Jaya"),
+                "username" => "dedy",
+                "password" => bcrypt("dedy"),
+                "phone_number" => "6285733465399",
+                "role_id" => 2,
+                "is_activated" => 1,
+            ],
         ];
 
         /**
@@ -70,6 +112,58 @@ class DatabaseSeeder extends Seeder
             ["menu_id" => 8, "description" => "Documentation is used to assist users in understanding the functions of each feature within the application. You can modify existing documentation or even create documentation for the menus you have created yourself."],
         ];
 
+        $service = [
+            ["name" => "Service Mobil"],
+            ["name" => "Cuci Mobil"],
+            ["name" => "Salon Mobil"],
+            ["name" => "Inspeksi Mobil"],
+            ["name" => "Service Motor"],
+            ["name" => "Cuci Motor"],
+            ["name" => "Tambal Ban"],
+            ["name" => "Carter Pickup"],
+            ["name" => "Laundry"],
+            ["name" => "Cleaning Service"],
+            ["name" => "Asisten Rumah Tangga"],
+            ["name" => "Service AC"],
+            ["name" => "Tukang Kunci"],
+            ["name" => "Tukang Bangunan"],
+            ["name" => "Tukang Cat"],
+            ["name" => "Tukang Listrik"],
+            ["name" => "Tukang Ledeng"],
+            ["name" => "Tukang Kebun"],
+            ["name" => "Service Lampu"],
+            ["name" => "Service TV"],
+            ["name" => "Service Handphone"],
+            ["name" => "Service Komputer"],
+            ["name" => "Service Printer"],
+            ["name" => "Service Kulkas"],
+            ["name" => "Service Pompa Air"],
+            ["name" => "Air Galon"],
+            ["name" => "Perawat"],
+            ["name" => "Caregiver"],
+            ["name" => "Babby Sitter"],
+            ["name" => "Sopir Mobil"],
+            ["name" => "Instruktur Kebugaran"],
+            ["name" => "Pijat Tunanetra"],
+            ["name" => "Pijat Bayi"],
+            ["name" => "Akupuntur"],
+            ["name" => "Bekam"],
+            ["name" => "Potong Rambut"],
+            ["name" => "Salon Rambut"],
+            ["name" => "Bimbel"],
+            ["name" => "Penerjemah Bahasa Inggris"],
+            ["name" => "Penerjemah Bahasa Mandarin"],
+            ["name" => "Tour Guide"],
+            ["name" => "Jasa Antri"],
+        ];
+
+        $expertise = [
+            ["user_id" => 2, "service_id" => 1],
+            ["user_id" => 3, "service_id" => 1],
+            ["user_id" => 4, "service_id" => 1],
+            ["user_id" => 5, "service_id" => 1],
+        ];
+
         /**
          * Seeding process
          */
@@ -79,5 +173,7 @@ class DatabaseSeeder extends Seeder
         Permission::insert($permission);
         User::insert($user);
         Documentation::insert($documentation);
+        Service::insert($service);
+        PartnerExpertise::insert($expertise);
     }
 }

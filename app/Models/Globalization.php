@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,12 +30,14 @@ class Globalization extends Model
         $data["app_font_color"] = Setting::where("name", "app_font_color")->get()->last()->value;
         $data["default_role_id"] = Role::max("id");
 
-        if (Route::current()->getName() != "login" && Route::current()->getName() != "register") {
-            $data["permission"] = Permission::where("role_id", Auth()->user()->role_id)->get();
-            $data["is_setting_allowed"] = Permission::where("role_id", Auth()->user()->role_id)
-                ->where("menu_id", 1)->count();
-            $data["is_activity_log_allowed"] = Permission::where("role_id", Auth()->user()->role_id)
-                ->where("menu_id", 3)->count();
+        if(Auth::check()){
+            if (Route::current()->getName() != "login" && Route::current()->getName() != "register") {
+                $data["permission"] = Permission::where("role_id", Auth()->user()->role_id)->get();
+                $data["is_setting_allowed"] = Permission::where("role_id", Auth()->user()->role_id)
+                    ->where("menu_id", 1)->count();
+                $data["is_activity_log_allowed"] = Permission::where("role_id", Auth()->user()->role_id)
+                    ->where("menu_id", 3)->count();
+            }
         }
 
         return $data;

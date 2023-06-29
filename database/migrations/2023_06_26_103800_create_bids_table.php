@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("users", function (Blueprint $table) {
+        Schema::create('bids', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("role_id")->constrained();
-            $table->string("name")->unique();
-            $table->string("username")->unique();
-            $table->string("password");
-            $table->string("phone_number")->unique();
-            $table->boolean("is_activated")->default(0);
+            $table->foreignId("user_id")->constrained();
+            $table->foreignId("order_id")->constrained()->onDelete("cascade");
+            $table->text("description")->nullable();
+            $table->integer("price")->nullable();
+            $table->boolean("is_accepted")->default(0);
             $table->timestamp("created_at")->useCurrent();
             $table->timestamp("updated_at")->useCurrent()->useCurrentOnUpdate();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("users");
+        Schema::dropIfExists('bids');
     }
 };

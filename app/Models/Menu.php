@@ -36,6 +36,9 @@ class Menu extends Model
             ["method" => "RESOURCE", "name" => ucfirst("permission"), "icon" => "fas fa-door-open", "route" => "permission", "is_serialized" => 1],
             ["method" => "RESOURCE", "name" => ucfirst("user"), "icon" => "fas fa-users", "route" => "user", "is_serialized" => 1],
             ["method" => "RESOURCE", "name" => ucfirst("documentation"), "icon" => "fas fa-book", "route" => "documentation", "is_serialized" => 1],
+            ["method" => "RESOURCE", "name" => ucfirst("service"), "icon" => "fas fa-hands", "route" => "service", "is_serialized" => 1],
+            ["method" => "RESOURCE", "name" => ucfirst("partner"), "icon" => "fas fa-handshake", "route" => "partner", "is_serialized" => 1],
+            ["method" => "RESOURCE", "name" => ucfirst("order"), "icon" => "fas fa-shopping-cart", "route" => "order", "is_serialized" => 1],
             ["method" => "GET", "name" => "User Activation", "icon" => NULL, "route" => "user.activation", "is_serialized" => 0],
         ];
         return $data;

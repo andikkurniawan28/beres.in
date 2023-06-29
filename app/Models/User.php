@@ -94,6 +94,7 @@ class User extends Authenticatable
         $request->validate([
             "name" => "required|unique:users",
             "username" => "required|unique:users",
+            "phone_number" => "required|unique:users",
         ]);
         $request->request->add([
             "password" => User::hashPassword($request),
@@ -127,6 +128,20 @@ class User extends Authenticatable
      */
     public function role(){
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Declare relationship with PartnerExpertise Model.
+     */
+    public function expertise(){
+        return $this->hasMany(PartnerExpertise::class);
+    }
+
+    /**
+     * Declare relationship with Bid Model.
+     */
+    public function bid(){
+        return $this->hasMany(Bid::class);
     }
 
     /**
@@ -165,7 +180,7 @@ class User extends Authenticatable
     public static function handleStore($request){
         $request->request->add(['password' => self::hashPassword($request)]);
         self::create($request->all());
-        return redirect()->route("user.index")->with("success", ucfirst("user has been stored."));
+        return redirect()->back()->with("success", ucfirst("user has been stored."));
     }
 
     /**
@@ -197,7 +212,7 @@ class User extends Authenticatable
         ]);
         $change = ActivityLog::checkModification(self::_model_name, $request, $id);
         ActivityLog::writeLog(Auth()->user()->name." update user ".$request->old_name.$change.".");
-        return redirect()->route("user.index")->with("success", ucfirst("user has been updated."));
+        return redirect()->back()->with("success", ucfirst("user has been updated."));
     }
 
     /**
@@ -207,6 +222,6 @@ class User extends Authenticatable
         $change = ActivityLog::checkDeletion(self::_model_name, $id);
         ActivityLog::writeLog(Auth()->user()->name." delete user ".$change.".");
         self::whereId($id)->delete();
-        return redirect()->route("user.index")->with("success", ucfirst("user has been deleted."));
+        return redirect()->back()->with("success", ucfirst("user has been deleted."));
     }
 }

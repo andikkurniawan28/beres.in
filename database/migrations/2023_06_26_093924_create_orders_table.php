@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("users", function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("role_id")->constrained();
-            $table->string("name")->unique();
-            $table->string("username")->unique();
-            $table->string("password");
-            $table->string("phone_number")->unique();
-            $table->boolean("is_activated")->default(0);
+            $table->foreignId("service_id")->constrained();
+            $table->text("description");
+            $table->text("address");
+            $table->string("phone_number");
+            $table->string("name");
+            $table->boolean("is_connected")->default(0);
+            $table->boolean("is_paid")->default(0);
+            $table->boolean("is_done")->default(0);
             $table->timestamp("created_at")->useCurrent();
             $table->timestamp("updated_at")->useCurrent()->useCurrentOnUpdate();
         });
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("users");
+        Schema::dropIfExists('orders');
     }
 };

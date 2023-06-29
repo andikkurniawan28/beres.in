@@ -19,6 +19,11 @@
         </div>
 
         <div class="form-group">
+            <input type="text" class="form-control form-control-user" id="phone_number" aria-describedby="phone_number"
+                placeholder="Enter phone_number..." name="phone_number" required>
+        </div>
+
+        <div class="form-group">
             <input type="password" class="form-control form-control-user" id="password" placeholder="Enter password..." name="password" required>
         </div>
 
