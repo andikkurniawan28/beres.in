@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('bids', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->onDelete("cascade");
             $table->foreignId("order_id")->constrained()->onDelete("cascade");
             $table->text("description")->nullable();
             $table->integer("price")->nullable();
-            $table->boolean("is_accepted")->default(0);
             $table->timestamp("created_at")->useCurrent();
             $table->timestamp("updated_at")->useCurrent()->useCurrentOnUpdate();
         });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bid;
+use App\Models\Sale;
 use App\Models\Order;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\Globalization;
 
@@ -16,9 +18,8 @@ class CheckBidController extends Controller
     }
 
     public function process(Request $request){
-        Bid::whereId($request->bit_id)->update(["is_accepted" => 1]);
-        $order_id = Bid::whereId($request->bid_id)->get()->last()->id;
-        Order::whereId($order_id)->update(["is_connected" => 1]);
-        return "Silahkan melakukan pembayaran";
+        $customer_number = Sale::createSalesThenGetCustomerNumber($request);
+        Bid::getPartnerIdThenNotifyPartner($request, $customer_number);
+        return redirect("https://wa.me/6285733465399");
     }
 }

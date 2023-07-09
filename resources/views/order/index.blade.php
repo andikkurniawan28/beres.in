@@ -26,7 +26,7 @@
                             <th>{{ ucfirst("service") }}</th>
                             <th>{{ ucfirst("description") }}</th>
                             <th>{{ ucfirst("location") }}</th>
-                            <th>{{ ucfirst("phone_number") }}</th>
+                            <th>{{ ucfirst("phone") }}</th>
                             <th>{{ ucfirst("name") }}</th>
                             <th>{{ ucfirst("bid") }}</th>
                             <th>{{ ucfirst("timestamp") }}</th>
@@ -54,11 +54,6 @@
                                 <form action="{{ route("order.destroy", $order->id) }}" method="POST" onsubmit="if(!confirm('User {{ $order->name }} will deleted, are you sure?')){return false;}">
                                     @csrf @method("DELETE")
                                     <a href="{{ route("order.edit", $order->id) }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> {{ ucfirst("edit") }}</a>
-                                    @if($order->is_activated === 0)
-                                    <a href="{{ route("user.activation", $order->id) }}" class="btn btn-outline-info btn-sm"><i class="fas fa-check"></i> {{ ucfirst("activate") }}</a>
-                                    @elseif($order->is_activated === 1)
-                                    <a href="{{ route("user.activation", $order->id) }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-ban"></i> {{ ucfirst("ban") }}</a>
-                                    @endif
                                     <button class="btn btn-outline-danger btn-sm" type="submit"><i class="fas fa-trash"></i> {{ ucfirst("delete") }}</button>
                                 </form>
                             </td>

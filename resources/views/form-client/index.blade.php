@@ -4,7 +4,7 @@
 
     <h5 class="h5 text-gray-900 mb-4 text-center">Halo, ada yang bisa kami bantu ? &#128075</h5>
 
-    <form class="user" method="POST" action="{{ route("form-client.process") }}">
+    <form class="user" method="POST" action="{{ route("form-client.process") }}" onsubmit="return checkForm(this);">
 
         @csrf @method("POST")
 
@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <label for="address">Lokasinya dimana ?</label>
-            <textarea class="form-control" name="address" cols="20" rows="10" placeholder="Cantumin nama jalan, kecamatan atau kelurahan. Kasih tanda juga ya misalnya depan kantor pos." required></textarea>
+            <textarea class="form-control" name="address" cols="20" rows="10" placeholder="Cantumin nama jalan, kecamatan atau kelurahan. Kasih patokan juga ya misalnya depan kantor pos atau depan jembatan." required></textarea>
         </div>
 
         <div class="form-group">
@@ -33,7 +33,7 @@
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">+62</span>
                 </div>
-                <input type="text" class="form-control" placeholder="8xxxxxxxxxx" aria-label="Username" aria-describedby="basic-addon1" name="phone_number" id="phone_number" required>
+                <input type="number" step="any" class="form-control" placeholder="8xxxxxxxxxx" aria-label="Username" aria-describedby="basic-addon1" name="phone_number" id="phone_number" required>
             </div>
         </div>
 
@@ -43,10 +43,19 @@
                 placeholder="" name="name" required>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">
+        <button type="submit" class="btn btn-primary btn-block" name="myButton" value="Submit">
            Submit
         </button>
 
     </form>
+
+    <script>
+
+        var checkForm = function(form) {
+          form.myButton.disabled = true;
+          return true;
+        };
+
+    </script>
 
 @endsection

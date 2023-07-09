@@ -97,13 +97,8 @@ class PartnerController extends Controller
             "role_id" => $request->role_id,
             "name" => $request->name,
             "username" => $request->username,
+            "phone_number" => $request->phone_number,
         ]);
-        if($request->has("service_id")){
-            PartnerExpertise::where("user_id", $id)->delete();
-            foreach($request->service_id as $service){
-                PartnerExpertise::insert(["user_id" => $id, "service_id" => $service]);
-            }
-        }
         return redirect()->back()->with("success", "Partner has been updated.");
     }
 

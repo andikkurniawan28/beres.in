@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
          * Variable to be seeded on settings table
          */
         $setting = [
-            ["name" => "app_name", "value" => "Beres.in"],
-            ["name" => "app_logo", "value" => "1687764132.png"],
-            ["name" => "app_icon", "value" => "1687764144.png"],
+            ["name" => "app_name", "value" => "AdaJasa"],
+            ["name" => "app_logo", "value" => "1688115566.png"],
+            ["name" => "app_icon", "value" => "1688115612.png"],
             ["name" => "app_color", "value" => "danger"],
             ["name" => "app_font_color", "value" => "dark"],
         ];
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $role = [
             ["name" => ucfirst("admin")],
             ["name" => ucfirst("partner")],
-            ["name" => ucfirst("client")],
+            ["name" => ucfirst("customer")],
         ];
 
         /**
@@ -66,35 +66,43 @@ class DatabaseSeeder extends Seeder
                 "is_activated" => 1,
             ],
             [
-                "name" => ucfirst("abdi"),
+                "name" => ucfirst("Family Garage"),
                 "username" => "abdi",
                 "password" => bcrypt("abdi"),
-                "phone_number" => "6285733465398",
+                "phone_number" => "6288888888888",
                 "role_id" => 2,
                 "is_activated" => 1,
             ],
             [
-                "name" => ucfirst("budi"),
+                "name" => ucfirst("Spesialis Suzuki Technology"),
                 "username" => "budi",
                 "password" => bcrypt("budi"),
-                "phone_number" => "6285733465396",
+                "phone_number" => "6287777777777",
                 "role_id" => 2,
                 "is_activated" => 1,
             ],
             [
-                "name" => ucfirst("candra"),
-                "username" => "candra",
-                "password" => bcrypt("candra"),
-                "phone_number" => "6285733465395",
+                "name" => ucfirst("Edi Sutrisno"),
+                "username" => "edi",
+                "password" => bcrypt("edi"),
+                "phone_number" => "6286666666666",
                 "role_id" => 2,
                 "is_activated" => 1,
             ],
             [
-                "name" => ucfirst("Saudara Jaya"),
+                "name" => ucfirst("Saudara Jaya Teknik"),
                 "username" => "dedy",
                 "password" => bcrypt("dedy"),
                 "phone_number" => "6285733465399",
                 "role_id" => 2,
+                "is_activated" => 1,
+            ],
+            [
+                "name" => ucfirst("Demo Account"),
+                "username" => "demo",
+                "password" => bcrypt("demo"),
+                "phone_number" => "6287666555444",
+                "role_id" => 3,
                 "is_activated" => 1,
             ],
         ];
@@ -157,12 +165,10 @@ class DatabaseSeeder extends Seeder
             ["name" => "Jasa Antri"],
         ];
 
-        $expertise = [
-            ["user_id" => 2, "service_id" => 1],
-            ["user_id" => 3, "service_id" => 1],
-            ["user_id" => 4, "service_id" => 1],
-            ["user_id" => 5, "service_id" => 1],
-        ];
+        for($i = 2; $i <= count($user)-1; $i++){
+            $expertise[$i]["service_id"] = 1;
+            $expertise[$i]["user_id"] = $i;
+        }
 
         /**
          * Seeding process

@@ -8,7 +8,7 @@
         </ol>
     </nav>
 
-    <h6 class="h6 text-gray-900 mb-4 text-center">Kalau OK segera bayar ya, biar <strong>{{ $bid->user->name }}</strong> segera berangkat &#128522;</h6>
+    <h6 class="h6 text-gray-900 mb-4 text-left">Tawaran dari <strong>{{ $bid->user->name }}</strong></h6>
 
     <table class="table table-sm table-hover table-bordered table-striped text-center">
         <tr>
@@ -25,7 +25,7 @@
                 @csrf @method("POST")
                 <input type="hidden" name="bid_id" value="{{ $bid->id }}">
                 <button type="submit" class="btn btn-primary btn-block">
-                    OK, bayar sekarang &#129309
+                    OK, pesan &#129309
                 </button>
                 </form>
             </td>

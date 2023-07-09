@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("password");
             $table->string("phone_number")->unique();
             $table->boolean("is_activated")->default(0);
+            $table->boolean("is_avalaible")->default(1);
             $table->timestamp("created_at")->useCurrent();
             $table->timestamp("updated_at")->useCurrent()->useCurrentOnUpdate();
         });

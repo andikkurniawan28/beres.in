@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <h6 class="h6 text-gray-900 mb-4">Halo Partner {{ $global["app_name"] }} a/n <strong>{{ $partner_name }}</strong></h6>
+    <h6 class="h6 text-gray-900 mb-4">Halo <strong>{{ $partner_name }}</strong></h6>
 
     <div class="form-group">
         <label for="description">Customer ada masalah gini</label>

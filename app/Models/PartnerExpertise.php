@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PartnerExpertise extends Model
 {
@@ -19,7 +20,8 @@ class PartnerExpertise extends Model
         return $this->belongsTo(Service::class);
     }
 
-    public static function selectPartnerWhereExpertise($request){
-        return self::where("service_id", $request->service_id)->select("user_id")->get();
+    public static function callActivePartner($request){
+        $partner_id = self::where("service_id", $request->service_id)->select("user_id")->get();
+        return User::where("is_activated", 1)->where("is_avalaible", 1)->whereIn("id", $partner_id)->select("id")->get();
     }
 }

@@ -25,6 +25,7 @@
                             <th>{{ strtoupper("id") }}</th>
                             <th>{{ ucfirst("service") }}</th>
                             <th>{{ ucfirst("name") }}</th>
+                            <th>{{ ucfirst("phone") }}</th>
                             <th>{{ ucfirst("status") }}</th>
                             <th>{{ ucfirst("timestamp") }}</th>
                             <th>{{ ucfirst("action") }}</th>
@@ -42,6 +43,7 @@
                                 @endforelse
                             </td>
                             <td>{{ $partner->name }}</td>
+                            <td>{{ $partner->phone_number }}</td>
                             <td>
                                 @if($partner->is_activated === 0)
                                 <span class="badge badge-pill badge-dark"><i class="fas fa-ban"></i> Inactive</span>

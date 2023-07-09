@@ -80,7 +80,15 @@ class User extends Authenticatable
         ]);
         if($attempt){
             $request->session()->regenerate();
-            return redirect()->intended();
+            if(Auth::user()->role->name === ucfirst("customer")){
+                return redirect()->route("application-customer.index");
+            }
+            elseif(Auth::user()->role->name === ucfirst("partner")){
+                return redirect()->route("application-partner.index");
+            }
+            else {
+                return redirect()->intended();
+            }
         }
         else{
             return redirect("login")->with("success", "Password is wrong !");
@@ -142,6 +150,13 @@ class User extends Authenticatable
      */
     public function bid(){
         return $this->hasMany(Bid::class);
+    }
+
+    /**
+     * Declare relationship with Bid Model.
+     */
+    public function order(){
+        return $this->hasMany(Order::class);
     }
 
     /**
@@ -223,5 +238,13 @@ class User extends Authenticatable
         ActivityLog::writeLog(Auth()->user()->name." delete user ".$change.".");
         self::whereId($id)->delete();
         return redirect()->back()->with("success", ucfirst("user has been deleted."));
+    }
+
+    public static function partnerIsWorking($user_id){
+        User::whereId($user_id)->update(["is_avalaible" => 0]);
+    }
+
+    public static function partnerIsAvalaible($user_id){
+        User::whereId($user_id)->update(["is_avalaible" => 1]);
     }
 }

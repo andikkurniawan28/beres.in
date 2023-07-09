@@ -38,7 +38,7 @@
                         <div class="p-5">
 
                             <div class="text-center">
-                                <img src="{{ "/Laravel-Starter/public/app_icon/".$global["app_icon"] }}" alt="app_icon" title="app_icon" width="150" height="150">
+                                <img src="{{ "/Laravel-Starter/public/app_icon/".$global["app_icon"] }}" alt="app_icon" title="app_icon" width="250" height="150">
                             </div>
 
                             @include("components.alert", [

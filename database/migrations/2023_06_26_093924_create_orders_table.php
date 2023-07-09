@@ -16,13 +16,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId("service_id")->constrained();
+            $table->foreignId("user_id")->constrained();
             $table->text("description");
             $table->text("address");
             $table->string("phone_number");
             $table->string("name");
-            $table->boolean("is_connected")->default(0);
-            $table->boolean("is_paid")->default(0);
-            $table->boolean("is_done")->default(0);
+            $table->boolean("is_open")->default(1);
             $table->timestamp("created_at")->useCurrent();
             $table->timestamp("updated_at")->useCurrent()->useCurrentOnUpdate();
         });
