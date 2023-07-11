@@ -6,6 +6,7 @@ use App\Models\Bid;
 use App\Models\Sale;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Partner;
 use App\Models\Service;
 use App\Models\Notification;
 use Illuminate\Http\Request;
@@ -19,16 +20,6 @@ class ApplicationPartnerController extends Controller
         $global = Globalization::index();
         $expertise = PartnerExpertise::where("user_id", Auth()->user()->id)->get();
         return view("application-partner.index", compact("global", "expertise"));
-    }
-
-    public function avalaible(){
-        User::whereId(Auth()->user()->id)->update(["is_avalaible" => 1]);
-        return redirect()->route("application-partner.index");
-    }
-
-    public function rest(){
-        User::whereId(Auth()->user()->id)->update(["is_avalaible" => 0]);
-        return redirect()->route("application-partner.index");
     }
 
     public function pesanan(){
@@ -49,18 +40,18 @@ class ApplicationPartnerController extends Controller
         return redirect()->route("application-partner.pesananByBidId", $bid_id);
     }
 
-    public static function selesai($order_id){
-        $sale = Sale::where("order_id", $order_id)->get()->last();
-        Order::close($sale->order_id);
-        Notification::notifyOrderIsClosed($sale);
-        User::partnerIsAvalaible($sale->bid->user_id);
-        return redirect()->route("application-partner.pesanan");
-    }
-
     public static function tambahLayanan(){
         $global = Globalization::index();
         $service = Service::all();
         return view("application-partner.tambahLayanan", compact("global", "service"));
+    }
+
+    public static function selesai($order_id){
+        $sale = Sale::where("order_id", $order_id)->get()->last();
+        Order::close($sale->order_id);
+        Notification::whatsapp($sale->bid->user->phone_number, "Terimakasih telah menyelesaikan tugas.");
+        Partner::isAvalaible($sale->bid->user_id);
+        return redirect()->route("application-partner.pesanan");
     }
 
     public static function tambahLayananProses(Request $request){

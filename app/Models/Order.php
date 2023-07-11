@@ -44,4 +44,8 @@ class Order extends Model
     public static function close($order_id){
         self::whereId($order_id)->update(["is_open" => 0]);
     }
+
+    public static function getID($request){
+        return self::where("description", $request->description)->get()->last()->id;
+    }
 }

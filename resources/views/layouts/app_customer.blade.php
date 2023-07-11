@@ -26,7 +26,7 @@
     <div id="footer-bar" class="footer-bar-5">
         <a href="{{ route("application-customer.index") }}" @if(Route::currentRouteName() === "application-customer.index") class="active-nav" @endif><i data-feather="home" data-feather-line="1" data-feather-size="21" data-feather-color="black" data-feather-bg="white"></i><span>Home</span></a>
         <a href="{{ route("application-customer.pesan", 1) }}" @if(Route::currentRouteName() === "application-customer.pesan") class="active-nav" @endif><i data-feather="phone-outgoing" data-feather-line="1" data-feather-size="21" data-feather-color="black" data-feather-bg="white"></i><span>Pesan</span></a>
-        <a href="{{ route("application-customer.pesanan", Auth::user()->id) }}" @if(Route::currentRouteName() === "application-customer.pesanan") class="active-nav" @endif><i data-feather="folder" data-feather-line="1" data-feather-size="21" data-feather-color="black" data-feather-bg="white"></i><span>Pesanan</span></a>
+        <a href="{{ route("application-customer.pesanan") }}" @if(Route::currentRouteName() === "application-customer.pesanan") class="active-nav" @endif><i data-feather="folder" data-feather-line="1" data-feather-size="21" data-feather-color="black" data-feather-bg="white"></i><span>Pesanan</span></a>
         <a href="{{ route("logout") }}"><i data-feather="log-out" data-feather-line="1" data-feather-size="21" data-feather-color="black" data-feather-bg="white"></i><span>Logout</span></a>
     </div>
 

@@ -108,7 +108,7 @@ class User extends Authenticatable
             "password" => User::hashPassword($request),
         ]);
         self::create($request->all());
-        return redirect("login")->with("success", "User registered successfully !");
+        return redirect("login")->with("success", "User registered successfully!");
     }
 
     /**
@@ -238,13 +238,5 @@ class User extends Authenticatable
         ActivityLog::writeLog(Auth()->user()->name." delete user ".$change.".");
         self::whereId($id)->delete();
         return redirect()->back()->with("success", ucfirst("user has been deleted."));
-    }
-
-    public static function partnerIsWorking($user_id){
-        User::whereId($user_id)->update(["is_avalaible" => 0]);
-    }
-
-    public static function partnerIsAvalaible($user_id){
-        User::whereId($user_id)->update(["is_avalaible" => 1]);
     }
 }

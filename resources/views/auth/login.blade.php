@@ -22,7 +22,9 @@
         <hr>
 
         <div class="text-center">
-            <a class="small" href="{{ route("register") }}">Register</a>
+            <a class="small" href="{{ route("form-partner") }}">Daftar sebagai Partner</a>
+            <br>
+            <a class="small" href="{{ route("register") }}">Daftar sebagai Customer</a>
         </div>
 
     </form>

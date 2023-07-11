@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <h1 class="h6 text-gray-900 mb-4">Halo, silahkan isi form dibawah untuk bergabung !</h6>
+    <h1 class="h6 text-gray-900 mb-4">Register Partner</h6>
 
     <form class="user" method="POST" action="{{ route("form-partner.process") }}">
 
@@ -25,12 +25,12 @@
                 placeholder="" name="name" required>
         </div>
 
-        <div class="input-group mb-3">
-            <label for="phone_number">Nomor Whatsapp Anda berapa ?</label>
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">+62</span>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="phone_number">Nomor Whatsapp Anda berapa ?</label>
+                <input type="text" class="form-control" id="phone_number" aria-describedby="phone_number"
+                    placeholder="628xxxxxxxxxx" name="phone_number" required>
             </div>
-            <input type="text" class="form-control" placeholder="8xxxxxxxxxx" aria-label="Username" aria-describedby="basic-addon1" name="phone_number" id="phone_number" required>
         </div>
 
         <div class="form-group">

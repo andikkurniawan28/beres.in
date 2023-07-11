@@ -22,6 +22,6 @@ class PartnerExpertise extends Model
 
     public static function callActivePartner($request){
         $partner_id = self::where("service_id", $request->service_id)->select("user_id")->get();
-        return User::where("is_activated", 1)->where("is_avalaible", 1)->whereIn("id", $partner_id)->select("id")->get();
+        return User::where("is_activated", 1)->where("is_avalaible", 1)->whereIn("id", $partner_id)->select(["id", "phone_number"])->get();
     }
 }

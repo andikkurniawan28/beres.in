@@ -26,9 +26,8 @@ class Bid extends Model
         return $this->hasMany(Sale::class);
     }
 
-    public static function insertFromPartnerList($partner_list, $order_id, $request){
-        self::insert(["user_id" => $partner_list->id,"order_id" => $order_id]);
-        ActivityLog::insert(["description" => "Create Bid for ".User::whereId($partner_list->id)->get()->last()->name."."]);
-        Notification::notifyPartner($partner_list->id, $order_id, $request);
+    public static function broadcast($partner_list, $order_id){
+        self::insert(["user_id" => $partner_list->id, "order_id" => $order_id]);
+        ActivityLog::insert(["description" => "Create Bid for ". User::whereId($partner_list->id)->get()->last()->name."."]);
     }
 }

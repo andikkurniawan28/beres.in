@@ -22,4 +22,12 @@ class Partner extends Model
         User::whereId($id)->delete();
         return redirect()->route("partner.index")->with("success", "Partner has been deleted.");
     }
+
+    public static function isWorking($user_id){
+        User::whereId($user_id)->update(["is_avalaible" => 0]);
+    }
+
+    public static function isAvalaible($user_id){
+        User::whereId($user_id)->update(["is_avalaible" => 1]);
+    }
 }

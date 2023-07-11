@@ -18,10 +18,13 @@ class Notification extends Model
 
     protected const API_TOKEN_INSTANCE = "9a8f9ac2f4b948fea0800829452628a635af9f523b984d3687";
 
+    public static function init(){
+        return new GreenApiClient( self::ID_INSTANCE, self::API_TOKEN_INSTANCE );
+    }
+
     public static function notifyPartner($user_id, $order_id, $request){
         $phone_number = User::whereId($user_id)->get()->last()->phone_number;
         $message = self::composeMessageForNotifyPartner($request, $order_id, $user_id);
-        $greenApi = new GreenApiClient( self::ID_INSTANCE, self::API_TOKEN_INSTANCE );
         $result = $greenApi->sending->sendMessage($phone_number."@c.us", $message);
     }
 
@@ -69,5 +72,10 @@ class Notification extends Model
         $bid = Bid::whereId($sale->bid_id)->get()->last();
         $greenApi = new GreenApiClient( self::ID_INSTANCE, self::API_TOKEN_INSTANCE );
         $greenApi->sending->sendMessage($bid->user->phone_number."@c.us", "Selamat kamu telah menyelesaikan tugas. Terima kasih atas bantuannya.");
+    }
+
+    public static function whatsapp($phone, $message){
+        $server = self::init();
+        $server->sending->sendMessage($phone."@c.us", $message);
     }
 }

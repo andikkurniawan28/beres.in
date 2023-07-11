@@ -26,8 +26,8 @@ class FormPartnerController extends Controller
             "password" => User::hashPassword($request),
         ]);
         $user_id = User::where("name", $request->name)->get()->last()->id;
-        PartnerExpertise::insert(["user_id" => $user_id, "service_id" => $service]);
+        PartnerExpertise::insert(["user_id" => $user_id, "service_id" => $request->service_id]);
         ActivityLog::insert(["description" => $request->name." register as Partner."]);
-        return redirect()->back()->with("success", "Partner has been created.");
+        return redirect()->route("login")->with("success", "Partner has been created.");
     }
 }

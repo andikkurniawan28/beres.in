@@ -52,24 +52,16 @@ Route::get("activity_log", [ActivityLogController::class, "index"])->name("activ
 
 Route::get("form-partner", [FormPartnerController::class, "index"])->name("form-partner");
 Route::post("form-partner", [FormPartnerController::class, "process"])->name("form-partner.process");
-Route::get("place-bid/{order_id}/{partner_id}", [PlaceBidController::class, "index"])->name("place-bid");
-Route::post("place-bid", [PlaceBidController::class, "process"])->name("place-bid.process");
-Route::get("check-bid/{order_id}/{partner_id}", [CheckBidController::class, "index"])->name("check-bid");
-Route::post("check-bid", [CheckBidController::class, "process"])->name("check-bid.process");
-Route::get("payment-bid/{bid_id}", [PaymentBidController::class, "index"])->name("payment-bid");
-Route::post("payment-bid", [PaymentBidController::class, "process"])->name("payment-bid.process");
 
 Route::get("application-customer", [ApplicationCustomerController::class, "index"])->name("application-customer.index")->middleware(["auth"]);
 Route::get("application-customer/pesan/{service_id}", [ApplicationCustomerController::class, "pesan"])->name("application-customer.pesan")->middleware(["auth"]);
 Route::post("application-customer/pesan", [ApplicationCustomerController::class, "prosesPesanan"])->name("application-customer.prosesPesanan")->middleware(["auth"]);
-Route::get("application-customer/pesanan/{user_id}", [ApplicationCustomerController::class, "pesanan"])->name("application-customer.pesanan")->middleware(["auth"]);
+Route::get("application-customer/pesanan", [ApplicationCustomerController::class, "pesanan"])->name("application-customer.pesanan")->middleware(["auth"]);
 Route::get("application-customer/pesananByOrderId/{order_id}", [ApplicationCustomerController::class, "pesananByOrderId"])->name("application-customer.pesananByOrderId")->middleware(["auth"]);
 Route::get("application-customer/cekTawaran/{bid_id}", [ApplicationCustomerController::class, "cekTawaran"])->name("application-customer.cekTawaran")->middleware(["auth"]);
 Route::post("application-customer/pesanTawaran", [ApplicationCustomerController::class, "pesanTawaran"])->name("application-customer.pesanTawaran")->middleware(["auth"]);
 
 Route::get("application-partner", [ApplicationPartnerController::class, "index"])->name("application-partner.index")->middleware(["auth"]);
-Route::get("application-partner/avalaible", [ApplicationPartnerController::class, "avalaible"])->name("application-partner.avalaible")->middleware(["auth"]);
-Route::get("application-partner/rest", [ApplicationPartnerController::class, "rest"])->name("application-partner.rest")->middleware(["auth"]);
 Route::get("application-partner/pesanan", [ApplicationPartnerController::class, "pesanan"])->name("application-partner.pesanan")->middleware(["auth"]);
 Route::get("application-partner/pesananByBidId/{bid_id}", [ApplicationPartnerController::class, "pesananByBidId"])->name("application-partner.pesananByBidId")->middleware(["auth"]);
 Route::post("application-partner/tawar", [ApplicationPartnerController::class, "tawar"])->name("application-partner.tawar")->middleware(["auth"]);

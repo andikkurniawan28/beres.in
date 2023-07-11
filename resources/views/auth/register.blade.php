@@ -2,6 +2,8 @@
 
 @section("content")
 
+    <h1 class="h6 text-gray-900 mb-4">Register Customer</h6>
+
     <form class="user" method="POST" action="{{ route("register.process") }}">
 
         @csrf @method("POST")
@@ -20,7 +22,7 @@
 
         <div class="form-group">
             <input type="text" class="form-control form-control-user" id="phone_number" aria-describedby="phone_number"
-                placeholder="Enter phone_number..." name="phone_number" required>
+                placeholder="628xxxxxxxxxx" name="phone_number" required>
         </div>
 
         <div class="form-group">
